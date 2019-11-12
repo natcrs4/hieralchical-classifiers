@@ -27,6 +27,7 @@ public class HClassifier<T extends Classifier> implements Classifier {
 	private Classifier classifier;
 	private int category;
 	private CategoryDictionary categoryDictionary;
+	private boolean level1=false;
 
 	public Classifier train(Dataset train) throws ClassifierException {
 		if (this.getCoverage().size() > 1) {
@@ -59,6 +60,7 @@ public class HClassifier<T extends Classifier> implements Classifier {
 
 	public List<ScoredItem> classify(SparseVector item) {
 		List<ScoredItem> rs = this.classifier.classify(item);
+		if(this.isLevel1()) return rs;
 		if (this.getChildren() == null)
 			return rs;
 		for (HClassifier<?> child : this.getChildren()) {

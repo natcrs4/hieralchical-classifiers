@@ -133,7 +133,15 @@ public News20Reader(String directory)
 		return this.documents.size();
 	}
 
-	
+	@Override
+	public Documents[] split(double d) {
+	     List<Documentable> part1 = this.documents.subList(0, (int)Math.round(d*this.size()));
+	     Documents [] dd = new Documents[2];
+	     dd[0]= new DocumentReader(part1);
+	     List<Documentable> part2 = this.documents.subList((int)Math.round(d*this.size()),this.size());
+	     dd[1]= new DocumentReader(part2);
+	     return dd;
+	}
 
 	
 }

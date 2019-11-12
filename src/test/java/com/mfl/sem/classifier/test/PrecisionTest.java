@@ -46,4 +46,7 @@ public class PrecisionTest {
 	  double result=precision.calculate();
 	  assertEquals(result,0.891,0.01);
   }
+  
+
+  
 }

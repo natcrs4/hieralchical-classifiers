@@ -18,6 +18,7 @@ public class Doc implements Documentable{
 	private String title;
 	private String [] categories;
 	private String [] links;
+	private String url;
 	//private int index;
 	 
 	
@@ -33,8 +34,20 @@ public class Doc implements Documentable{
 	@Override
 	public String text() {
 		
-		return title+ " "+ description + " "+ authors;
+		return (title==null?"":title)+ " "+ (description==null?"":description) + " "+ (authors==null?"":authors);
 	}
+
+
+
+
+
+
+
+
+
+
+
+	
 
 	
 

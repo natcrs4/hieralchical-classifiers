@@ -37,6 +37,7 @@ public class Dataset {
 	}
 	
 	public Dataset [] split(double percentuale) {
+		
 		int dim1=Math.round(this.data.length*0.6f);
 		int dim2=this.data.length-dim1;
 		SparseVector[] ve1=new SparseVector[dim1];
@@ -44,6 +45,7 @@ public class Dataset {
 		int cat1[]= new int[dim1];
 		SparseVector[] ve2=new SparseVector[dim2];
 		int cat2[]= new int[dim2];
+		
 		for(int k=0;k<this.data.length;k++) {
 			if(k<dim1) {
 				ve1[k]=this.data[k];
