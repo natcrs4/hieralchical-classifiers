@@ -3,23 +3,17 @@ package com.mfl.sem.classifier.text.impl;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
-import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 
+import com.crs4.sem.analysis.AuxAttribute;
 import com.crs4.sem.model.Documentable;
-import com.mfl.sem.analysis.AuxAttribute;
 import com.mfl.sem.classifier.Classifier;
-import com.mfl.sem.classifier.HClassifier;
 import com.mfl.sem.classifier.exception.ClassifierException;
-import com.mfl.sem.classifier.impl.NaiveBayesClassifier;
-import com.mfl.sem.classifier.impl.SVMClassifier;
 import com.mfl.sem.classifier.model.Category;
 import com.mfl.sem.classifier.model.CategoryDictionary;
 import com.mfl.sem.classifier.model.Dictionary;
@@ -29,7 +23,6 @@ import com.mfl.sem.classifier.text.Documents;
 import com.mfl.sem.classifier.text.TextClassifier;
 import com.mfl.sem.model.Dataset;
 import com.mfl.sem.model.ScoredItem;
-import com.mfl.sem.text.model.Doc;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
