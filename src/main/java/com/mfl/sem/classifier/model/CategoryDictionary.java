@@ -18,7 +18,7 @@ public class CategoryDictionary {
 		 this.setIndexes(new HashMap<Integer,Category>());
 		 this.setCounter(0);
 }
-	 public  Category newCategory(String label){
+	 synchronized public  Category newCategory(String label){
 		   String  	_label=label.trim().toLowerCase();
 		    	Category aux = this.getCategories().get(_label);
 		    	if(aux==null){

@@ -142,6 +142,11 @@ public News20Reader(String directory)
 	     dd[1]= new DocumentReader(part2);
 	     return dd;
 	}
+	@Override
+	public void shuffle() {
+		Collections.shuffle(this.getDocuments());
+		
+	}
 
 	
 }

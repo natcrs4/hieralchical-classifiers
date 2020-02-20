@@ -26,7 +26,7 @@ public class TextPrecision {
 
 	
 	public void split(double perc) {
-		Documents[] splitted = this.getDocuments().split(0.6d);
+		Documents[] splitted = this.getDocuments().split(perc);
     	
     	this.setTrainset(splitted[0]);
     	this.setTestset(splitted[1]);
@@ -41,7 +41,11 @@ public class TextPrecision {
     		List<ScoredItem> res = this.textClassifier.classify(item);
     		HashSet<String> set = new HashSet<String>(Arrays.asList(this.getTestset().get(k).getCategories()));
     		if(!res.isEmpty()&&set.contains(res.get(0).getLabel()))
+    	
     			result++;
+    		else 
+    			if(res.size()>1&&set.contains(res.get(1).getLabel()))
+    	    	 result++;
     	}
     	result=result/this.getTestset().size();
     	return result;

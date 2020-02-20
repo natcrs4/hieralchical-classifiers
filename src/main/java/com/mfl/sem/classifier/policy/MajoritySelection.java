@@ -11,11 +11,11 @@ import com.mfl.sem.model.ScoredItem;
 
 public class MajoritySelection implements SelectionPolicy{
 	
-    Map<Integer,Integer> map= new HashMap<Integer,Integer>();
-    Map<Integer,ScoredItem> rs= new HashMap<Integer,ScoredItem>();
+   
 	@Override
 	public List<ScoredItem> select(List<ScoredItem>[] classifications) {
-		
+		 Map<Integer,Integer> map= new HashMap<Integer,Integer>();
+		    Map<Integer,ScoredItem> rs= new HashMap<Integer,ScoredItem>();
 		for( List<ScoredItem> list :classifications) {
 			ScoredItem first = list.get(0);
 			 Integer s = map.get(first.getIndex());
@@ -25,9 +25,10 @@ public class MajoritySelection implements SelectionPolicy{
 				 rs.put(first.getIndex(), item);
 			 }
 			 else
-				 map.put(first.getIndex(), s+1);
+				 {map.put(first.getIndex(), s+1);
 			     ScoredItem item = rs.get(first.getIndex());
 			     item.setScore(s+1d);
+				 }
 		}
 		Collection<ScoredItem> values = rs.values();
 		List<ScoredItem>result= new ArrayList<ScoredItem>(values);

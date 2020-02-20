@@ -14,8 +14,8 @@ import no.uib.cipr.matrix.sparse.SparseVector;
 
 
 public interface Classifier {
-	 public Classifier train(Dataset problem) throws ClassifierException ;
-	 public Classifier train(Dataset problem, Map<Integer,Integer>  coverage) throws ClassifierException ;
+	 public Classifier train(Dataset ... problems) throws ClassifierException ;
+	 public Classifier train(Map<Integer,Integer>  coverage,Dataset ... problems) throws ClassifierException ;
 	 public  List<ScoredItem> classify(SparseVector item) ;
 	
 }

@@ -31,7 +31,8 @@ public class NaiveBayesClassifier implements Classifier {
 	
 
 	@Override
-	public Classifier train(Dataset problem) {
+	public Classifier train(Dataset ...problems) {
+		Dataset problem=problems[0];
 		this.setProblem(problem);
 		this.worddocument=new SparseVector[problem.getData().length];
 		this.wordcategorycount= new SparseVector[problem.getCategorysize()];
@@ -130,7 +131,7 @@ public class NaiveBayesClassifier implements Classifier {
 
 
 	@Override
-	public Classifier train(Dataset problem, Map<Integer, Integer> coverage) {
+	public Classifier train(Map<Integer, Integer> coverage,Dataset ... problems) {
 		// TODO Auto-generated method stub
 		return null;
 	}

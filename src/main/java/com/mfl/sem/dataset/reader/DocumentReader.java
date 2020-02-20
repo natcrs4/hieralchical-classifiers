@@ -1,5 +1,6 @@
 package com.mfl.sem.dataset.reader;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.collections4.ListUtils;
@@ -43,6 +44,12 @@ public class DocumentReader extends Documents{
 	     List<Documentable> part2 = this.docs.subList((int)Math.round(d*this.size()),this.size());
 	     dd[1]= new DocumentReader(part2);
 	     return dd;
+	}
+
+	@Override
+	public void shuffle() {
+		Collections.shuffle(this.getDocs());
+		
 	}
 
 }

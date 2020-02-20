@@ -23,6 +23,7 @@ import com.mfl.sem.classifier.text.Documents;
 import com.mfl.sem.classifier.text.TextClassifier;
 import com.mfl.sem.model.Dataset;
 import com.mfl.sem.model.ScoredItem;
+import com.mfl.sem.text.model.Doc;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,11 +36,11 @@ import no.uib.cipr.matrix.sparse.SparseVector;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TextClassifierImpl implements TextClassifier {
-	private Classifier classifier;
-	private Analyzer analyzer;
-	private Dictionary dictionary;
-	private CategoryDictionary categoryDictionary;
-	private Dataset problem;
+	protected Classifier classifier;
+	protected Analyzer analyzer;
+	protected Dictionary dictionary;
+	protected CategoryDictionary categoryDictionary;
+	protected Dataset problem;
 
 	public TextClassifierImpl(Analyzer analyzer, Classifier classifier) {
 		this.setAnalyzer(analyzer);
@@ -57,6 +58,7 @@ public class TextClassifierImpl implements TextClassifier {
 
 	@Override
 	public TextClassifier train(Documents documents) throws IOException, ClassifierException {
+		
 		Dataset problem = makeProblem(documents);
 		this.setProblem(problem);
 		this.getClassifier().train(problem);
@@ -90,6 +92,7 @@ public class TextClassifierImpl implements TextClassifier {
 			vectors[j] = current;
 			j++;
 		}
+		System.out.println(" dictionary size " + this.getDictionary().size());
 		Dataset problem = new Dataset(vectors, categories, this.getDictionary().size(),
 				this.getCategoryDictionary().size());
 		return problem;
@@ -182,6 +185,21 @@ public class TextClassifierImpl implements TextClassifier {
 			sc.setLabel(this.getCategoryDictionary().getCategory(sc.getIndex()).getLabel());
 		}
 		return result;
+	}
+
+	public static List<Documentable> expandUniLabel(Documents documents) {
+		Iterator<DocItem> iterator = documents.iterator();
+		List<Documentable> docs= new ArrayList<Documentable>();
+		while(iterator.hasNext()) {
+			DocItem docitem = iterator.next();
+			Documentable doc= docitem.get();
+			for(String cat:doc.getCategories()) {
+				String []newcategories= new String[1];
+				newcategories[0]=cat;
+				Doc newdoc = Doc.builder().authors(doc.getAuthors()).url(doc.getUrl()).description(doc.getDescription()).title(doc.getTitle()).categories(newcategories).build();
+			    docs.add(newdoc);
+			}}
+		return docs;
 	}
 
 }

@@ -23,6 +23,8 @@ public class Category {
 	public int hashCode() {
 		return this.getLabel().hashCode();
 	}
+
+	
 	
 	
 }

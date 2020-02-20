@@ -29,11 +29,11 @@ public class HClassifier<T extends Classifier> implements Classifier {
 	private CategoryDictionary categoryDictionary;
 	private boolean level1=false;
 
-	public Classifier train(Dataset train) throws ClassifierException {
+	public Classifier train(Dataset ... train) throws ClassifierException {
 		if (this.getCoverage().size() > 1) {
 			// System.out.println(Arrays.toString(this.coverage));
 			Map<Integer,Integer> newcov= this.add(this.getCoverage(),this.getCategory());
-			classifier.train(train, newcov);
+			classifier.train(newcov,train);
 			for (int j = 0; j < children.size(); j++)
 				try {
 					children.get(j).train(train);
@@ -53,9 +53,9 @@ public class HClassifier<T extends Classifier> implements Classifier {
 		return newmap;
 	}
 
-	public Classifier train(Dataset problem, Map<Integer, Integer> coverage) throws ClassifierException {
+	public Classifier train(Map<Integer, Integer> coverage,Dataset ... problems) throws ClassifierException {
 
-		return this.getClassifier().train(problem, coverage);
+		return this.getClassifier().train(coverage,problems);
 	}
 
 	public List<ScoredItem> classify(SparseVector item) {

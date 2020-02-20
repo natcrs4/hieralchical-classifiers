@@ -74,4 +74,6 @@ public abstract class Documents {
 
 	public abstract Documents[] split(double d) ;
 
+	public  abstract void shuffle() ;
+
 }

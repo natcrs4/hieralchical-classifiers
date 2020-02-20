@@ -34,8 +34,8 @@ public class SVMClassifier implements Classifier {
 	private Model model;
 
 	@Override
-	public Classifier train(Dataset dataset) throws ClassifierException {
-		
+	public Classifier train(Dataset ... datasets) throws ClassifierException {
+		Dataset dataset= datasets[0];
 		int newsize=computeNewSize(dataset.getCategories());
 		if(newsize==0) throw new ZeroInstanceException();
 		//this.setParameter( new Parameter(SolverType.L2R_LR_DUAL, 0.1, 0.1));
@@ -57,7 +57,7 @@ public class SVMClassifier implements Classifier {
             i++;
 		}
 		Linear.disableDebugOutput();
-		this.setModel(Linear.train(problem, new Parameter(SolverType.L2R_LR_DUAL, 0.1, 0.1)));
+		this.setModel(Linear.train(problem, new Parameter(SolverType.L2R_LR_DUAL,100, 1, 0.01)));
 		return this;
 	}
 
@@ -112,7 +112,8 @@ public class SVMClassifier implements Classifier {
 	}
 
 	@Override
-	public Classifier train(Dataset problem, Map<Integer, Integer> coverage) throws ClassifierException {
+	public Classifier train( Map<Integer,Integer>  coverage,Dataset ... problems) throws ClassifierException {
+		Dataset problem= problems[0];
 		Dataset dataset = reconfigureDataset(problem, coverage);
 		dataset.balance();
 		this.train(dataset);

@@ -1,6 +1,7 @@
 package com.mfl.sem.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,16 @@ public class Dataset {
     	this.setCategories(categories);
     }
 
-    
+//    public Dataset shuffle() {
+//    	List<Integer> indexes= new ArrayList<Integer>(this.data.length);
+//    	
+//    	for ( int i=0;i<data.length;i++) {
+//    		indexes.set(i, i);
+//    	}
+//    	Collections.shuffle(indexes);
+//    	SparseVector [] data= new SparseVector[this.data.length];
+//    	int [] categories= new int[this.data.length];
+//    }
     public Dataset() {
     	
     }
